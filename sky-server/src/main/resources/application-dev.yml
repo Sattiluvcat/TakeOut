@@ -11,3 +11,8 @@ sky:
     access-key-id: ${SKY_ALIOSS_ACCESS_KEY_ID}
     access-key-secret: ${SKY_ALIOSS_ACCESS_KEY_SECRET}
     bucket-name: ${SKY_ALIOSS_BUCKET_NAME:sattis-photo}
+  redis:
+    host: localhost
+    port: 6379
+    password: 123456
+    database: 10
