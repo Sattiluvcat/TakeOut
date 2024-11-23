@@ -70,4 +70,11 @@ public class OrderController {
         orderService.anotherOrder(id);
         return Result.success();
     }
+
+    // 催单
+    @GetMapping("/reminder/{id}")
+    public Result remainder(@PathVariable("id") Long id){
+        orderService.reminder(id);
+        return Result.success();
+    }
 }
