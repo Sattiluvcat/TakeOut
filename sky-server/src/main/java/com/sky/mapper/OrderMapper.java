@@ -1,6 +1,7 @@
 package com.sky.mapper;
 
 import com.github.pagehelper.Page;
+import com.sky.dto.GoodsSalesDTO;
 import com.sky.dto.OrdersPageQueryDTO;
 import com.sky.entity.Orders;
 import org.apache.ibatis.annotations.Mapper;
@@ -8,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 
 @Mapper
@@ -44,4 +46,14 @@ public interface OrderMapper {
 
     @Select("select * from orders where status=#{status} and order_time<#{orderTime}")
     List<Orders> getByStatusOrderTime(Integer status,LocalDateTime orderTime);
+
+    Double getStaticByDate(HashMap map);
+
+    Integer getOrder(Integer o, LocalDateTime firstTime, LocalDateTime endTime);
+
+    @Select("select od.name,sum(od.number) number from order_detail od ,orders o " +
+            "where order_id=o.id and o.status=5 " +
+            "and o.order_time>=#{beginTime} and o.order_time<=#{endTime} " +
+            "group by od.name order by number desc limit 0,10;")
+    List<GoodsSalesDTO> getTop10(LocalDateTime beginTime, LocalDateTime endTime);
 }

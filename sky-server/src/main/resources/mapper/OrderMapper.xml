@@ -67,4 +67,33 @@
         </where>
         order by order_time desc
     </select>
+    <select id="getStaticByDate" resultType="java.lang.Double">
+        select sum(amount) from orders
+        <where>
+            <if test="begin!=null">
+                and order_time &gt; #{begin}
+            </if>
+            <if test="end!=null">
+                and order_time &lt; #{end}
+            </if>
+            <if test="status!=null">
+                and status = #{status}
+            </if>
+        </where>
+    </select>
+    <select id="getOrder" resultType="java.lang.Integer">
+        select count(*) from orders
+        <where>
+            <if test="firstTime!=null">
+                and order_time &gt; #{firstTime}
+            </if>
+            <if test="endTime!=null">
+                and order_time &lt; #{endTime}
+            </if>
+            <if test="o!=null">
+                and status = #{o}
+            </if>
+        </where>
+    </select>
+
 </mapper>
