@@ -19,7 +19,7 @@ public class POITask {
         row.createCell(0).setCellValue("ID");
         sheet.createRow(2).createCell(0).setCellValue("1");
         // write in disk & real "write"
-        FileOutputStream stream = new FileOutputStream(new File("C:\\Users\\lingl\\Desktop\\info.xlsx"));
+        FileOutputStream stream = new FileOutputStream(new File("C:\\info.xlsx"));
         workbook.write(stream);
         // close resource
         stream.close();
@@ -29,7 +29,7 @@ public class POITask {
     public static void read() throws IOException {
         // read
         XSSFWorkbook excel=new XSSFWorkbook(Files.newInputStream
-                (new File("C:\\Users\\lingl\\Desktop\\info.xlsx").toPath()));
+                (new File("C:\\info.xlsx").toPath()));
         String s = excel.getSheet("info").getRow(0).getCell(0).getStringCellValue();
         System.out.println(s);
         excel.close();
