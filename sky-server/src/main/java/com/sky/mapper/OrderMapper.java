@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Update;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface OrderMapper {
@@ -51,9 +52,12 @@ public interface OrderMapper {
 
     Integer getOrder(Integer o, LocalDateTime firstTime, LocalDateTime endTime);
 
+
     @Select("select od.name,sum(od.number) number from order_detail od ,orders o " +
             "where order_id=o.id and o.status=5 " +
             "and o.order_time>=#{beginTime} and o.order_time<=#{endTime} " +
             "group by od.name order by number desc limit 0,10;")
     List<GoodsSalesDTO> getTop10(LocalDateTime beginTime, LocalDateTime endTime);
+
+    Integer countByMap(Map map);
 }
